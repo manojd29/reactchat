@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import Messages from "../Messages/Messages";
+import "./Chat.css";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
-import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
 let socket;
@@ -35,7 +37,7 @@ export default function Chat({ name, room, photoURL }) {
   };
   console.log(message, messages);
   return (
-    <div>
+    <div className="container">
       <InfoBar room={room} />
       <Messages messages={messages} name={name} photoURL={photoURL} />
       <Input

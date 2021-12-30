@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
 import socketClient from "socket.io-client";
-import {
-  Image,
-  Form,
-  Button,
-  Card,
-  Container,
-  Row,
-  FormControl,
-  Col,
-} from "react-bootstrap";
+import { Image, Form, Button, Card, FormControl } from "react-bootstrap";
 import "./GlobalChat.css";
 import ReactEmoji from "react-emoji";
 import ScrollableFeed from "react-scrollable-feed";
+import ScrollToBottom from "react-scroll-to-bottom";
 import Chat from "../Chat/Chat";
-import image from "./image.jpg";
 let socket;
 
 function GlobalChat({ user }) {
@@ -71,14 +62,10 @@ function GlobalChat({ user }) {
           <Card id="join-card">
             <Form onSubmit={joinRoom}>
               <div xs={6} md={4} className="text-center">
-                <Image
-                  src={photo}
-                  onError="https://commons.wikimedia.org/wiki/File:Circle-icons-image.svg"
-                  roundedCircle
-                />
+                <Image src={photo} roundedCircle />
               </div>
               <center>
-                <Card.Title id="text-center">{name}</Card.Title>
+                <Card.Title>{name}</Card.Title>
               </center>
               <center>
                 <FormControl
@@ -96,7 +83,7 @@ function GlobalChat({ user }) {
         </div>
         <div id="right-container">
           <div id="msg-container">
-            <ScrollableFeed>
+            <ScrollToBottom>
               {messages.map((message, index) => {
                 if (message.id === name) {
                   return (
@@ -124,7 +111,7 @@ function GlobalChat({ user }) {
                   );
                 }
               })}
-            </ScrollableFeed>
+            </ScrollToBottom>
           </div>
           <form onSubmit={formSubmit} id="msg-form">
             <input

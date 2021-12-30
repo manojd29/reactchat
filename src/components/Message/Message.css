@@ -1,45 +1,110 @@
-body{
-    background-color: rgb(44, 47, 53);
-    background-repeat: no-repeat;
+/* body {
+  background-color: rgb(44, 47, 53);
+  background-repeat: no-repeat;
 }
-.right-message-container{
-    justify-content: flex-end;
-    display: flex;
-    margin-top: 5px;
-    margin-right: 10px;
+.right-message-container {
+  justify-content: flex-end;
+  display: flex;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+.left-message-container {
+  justify-content: flex-start;
+  display: flex;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.sent-text {
+  max-width: 100%;
+  width: fit-content;
+  margin-top: -10px;
+  font-size: 1.5rem;
+  letter-spacing: 0;
+  background-color: rgb(147, 226, 116);
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  float: left;
+  word-wrap: break-word;
+}
+.sender-message {
+  max-width: 100%;
+  font-size: 1.5rem;
+  width: fit-content;
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  background-color: rgb(154, 175, 247);
+}
+.sender-name {
+  font-size: medium;
+  width: fit-content;
+  border-radius: 10px;
+  background-color: whitesmoke;
+} */
 
+.messageBox {
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: white;
+  display: inline-block;
+  max-width: 80%;
 }
-.left-message-container{
-    justify-content: flex-start;
-    display: flex;
-    margin-top: 5px;
-    margin-left: 10px;
-    
+
+.messageText {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1.1em;
+  word-wrap: break-word;
 }
-.sent-text{
-    max-width: 100%;
-    width: fit-content;
-    margin-top: -10px;
-    letter-spacing: 0;
-    background-color: rgb(147, 226, 116);
-    border-radius: 10px;
-    padding: 10px 10px 10px 10px;
-    float: left;
-    word-wrap: break-word;
+
+.messageText img {
+  vertical-align: middle;
 }
-.sender-message{
-    max-width: 100%;
-    width: fit-content;
-    padding: 10px 10px 10px 10px;
-    border-radius: 10px;
-    background-color: rgb(154, 175, 247);
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 3px;
 }
-.sender-name{
-    width: fit-content;
-    border-radius: 10px;
-    background-color: whitesmoke;
+
+.sentText {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica;
+  color: #828282;
+  letter-spacing: 0.3px;
 }
-p{
-    font-size: 1.5rem;
-    padding:5px 5px 5px 5px;
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.colorDark {
+  color: #353535;
+}
+
+.backgroundBlue {
+  background: #2979ff;
+}
+
+.backgroundLight {
+  background: #f3f3f3;
 }

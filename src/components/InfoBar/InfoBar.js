@@ -1,16 +1,18 @@
 import React from "react";
+import { Container, Button } from "react-bootstrap";
+import "./InfoBar.css";
 
 export default function InfoBar({ room }) {
   return (
-    <div className="infobar-container">
+    <Container className="infobar-container">
       <div className="left-container">
-        <h2 className="room-name">{room}</h2>
+        <h1 className="room-name">{room}</h1>
       </div>
       <div className="right-container">
         <a href="/">
-          <p>Leave Room</p>
+          <Button className="leave-btn">Leave Room</Button>
         </a>
       </div>
-    </div>
+    </Container>
   );
 }

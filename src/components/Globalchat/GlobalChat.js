@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import socketClient from "socket.io-client";
-import { Image, Form, Button, Card, FormControl } from "react-bootstrap";
+import { Image, Form, Button, Card } from "react-bootstrap";
 import "./GlobalChat.css";
 import ReactEmoji from "react-emoji";
 import ScrollableFeed from "react-scrollable-feed";
-import ScrollToBottom from "react-scroll-to-bottom";
 import Chat from "../Chat/Chat";
+import { auth } from "../../firebase";
+import { useHistory } from "react-router-dom";
+import badWords from "bad-words-relaxed";
 let socket;
 
 function GlobalChat({ user }) {
+  const history = useHistory();
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState();
@@ -17,12 +20,19 @@ function GlobalChat({ user }) {
   const [joined, setJoined] = useState(false);
   const ENDPOINT = `http://localhost:5000`;
 
+  var filter = new badWords();
+
   const joinRoom = (e) => {
     if (!room) {
       e.preventDefault();
     } else {
       setJoined(true);
     }
+  };
+
+  const logOut = () => {
+    auth.signOut();
+    history.push("/login");
   };
 
   useEffect(() => {
@@ -57,66 +67,76 @@ function GlobalChat({ user }) {
     </>
   ) : (
     <>
-      <div id="outer-container">
-        <div id="left-container">
-          <Card id="join-card">
-            <Form onSubmit={joinRoom}>
-              <div xs={6} md={4} className="text-center">
+      <div className="outerContainer">
+        <div ClassName="leftContainer">
+          <Card className="join-card">
+            <h5>Create Room</h5>
+            <p>Welcome back, {name}.</p>
+            <Form onSubmit={joinRoom} className="text-center">
+              <div xs={6} md={4} style={{ marginTop: "10px" }}>
                 <Image src={photo} roundedCircle />
               </div>
-              <center>
-                <Card.Title>{name}</Card.Title>
-              </center>
-              <center>
-                <FormControl
-                  id="join-input"
-                  placeholder="Enter Room Name to continue.."
-                  style={{ textTransform: "lowercase" }}
-                  onChange={(e) => setRoom(e.target.value)}
-                />
-                <Button id="join-btn" type="submit">
-                  Join
-                </Button>
-              </center>
+
+              <Card.Title>{name}</Card.Title>
+
+              <input
+                className="join-input"
+                placeholder="Enter Room Name.."
+                style={{ textTransform: "lowercase", textAlign: "center" }}
+                onChange={(e) => setRoom(e.target.value)}
+              />
+              <Button className="send-btn" type="submit">
+                Join
+              </Button>
             </Form>
+
+            <p>Not, {name}?</p>
+            <Button className="logout-btn" onClick={logOut}>
+              Sign Out
+            </Button>
           </Card>
         </div>
-        <div id="right-container">
-          <div id="msg-container">
-            <ScrollToBottom>
+        <div className="rightContainer">
+          <h3>Chat with everyone!</h3>
+          <div className="msg-container">
+            <ScrollableFeed>
               {messages.map((message, index) => {
                 if (message.id === name) {
                   return (
-                    <div id="msg-sender">
-                      <div id="msg-content" key={index}>
-                        <div>
-                          <Image width="25px" src={message.pic} roundedCircle />
-                          {message.id}
+                    <div className="messageContainer justifyEnd">
+                      <div className="sent-text pr-10" key={index}>
+                        <Image width="25px" src={message.pic} roundedCircle />
+                        {message.id}
+                        <div className="message-box backgroundBlue">
+                          <p className="message-text colorWhite">
+                            {ReactEmoji.emojify(filter.clean(message.body))}
+                          </p>
                         </div>
-                        <div id="">{ReactEmoji.emojify(message.body)}</div>
                       </div>
                     </div>
                   );
                 } else {
                   return (
-                    <div id="msg-receiver">
-                      <div id="other-content" key={index}>
-                        <div>
-                          <Image width="25px" src={message.pic} roundedCircle />
-                          {message.id}
+                    <div className="messageContainer justifyStart">
+                      <div className="sent-text pl-10 " key={index}>
+                        <div className="message-box backgroundLight">
+                          <p className="message-text colorDark">
+                            {ReactEmoji.emojify(filter.clean(message.body))}
+                          </p>
                         </div>
-                        <div>{ReactEmoji.emojify(message.body)}</div>
+                        <Image width="25px" src={message.pic} roundedCircle />
+                        {message.id}
                       </div>
                     </div>
                   );
                 }
               })}
-            </ScrollToBottom>
+            </ScrollableFeed>
           </div>
-          <form onSubmit={formSubmit} id="msg-form">
+          <form onSubmit={formSubmit} className="msg-form">
             <input
               placeholder="Type a message to send"
-              id="msg-input"
+              className="msg-input"
               type="text"
               autoComplete="off"
               name="messageInput"
@@ -124,7 +144,7 @@ function GlobalChat({ user }) {
               onChange={(event) => setMessage(event.target.value)}
             />
             <Button
-              id="msg-btn"
+              className="msg-btn"
               type="submit"
               onClick={(e) => (!message ? e.preventDefault() : "null")}
             >

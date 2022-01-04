@@ -9,7 +9,7 @@ export default function InfoBar({ room }) {
         <h1 className="room-name">{room}</h1>
       </div>
       <div className="right-container">
-        <a href="/">
+        <a href="/home">
           <Button className="leave-btn">Leave Room</Button>
         </a>
       </div>

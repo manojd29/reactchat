@@ -32,7 +32,7 @@ function GlobalChat({ user }) {
 
   const logOut = () => {
     auth.signOut();
-    history.push("/login");
+    history.push("/");
   };
 
   useEffect(() => {

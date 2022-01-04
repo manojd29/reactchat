@@ -10,7 +10,7 @@ export default function Login() {
   const signInWithGoogle = () => {
     auth.signInWithPopup(provider).then(() => {
       setLoading(true);
-      history.push("/");
+      history.push("/home");
     });
   };
 

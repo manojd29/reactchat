@@ -12,7 +12,7 @@ export default function Chat({ name, room, photoURL }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const ENDPOINT = "http://localhost:4000";
+  const ENDPOINT = "https://speakless.herokuapp.com/";
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("join", { name, room, photoURL }, () => {});

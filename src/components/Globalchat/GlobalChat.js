@@ -18,7 +18,7 @@ function GlobalChat({ user }) {
   const [messages, setMessages] = useState([]);
   const [room, setRoom] = useState("");
   const [joined, setJoined] = useState(false);
-  const ENDPOINT = `https://speakless.herokuapp.com/`;
+  const ENDPOINT = `https://chatinfinity.herokuapp.com/`;
 
   var filter = new badWords();
 
